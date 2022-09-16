@@ -41,10 +41,11 @@ public class PostsApiControllerTest {
         //given
         String title = "title";
         String content = "content";
+        String author = "author";
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
                 .title(title)
                 .content(content)
-                .author("author")
+                .author(author)
                 .build();
 
         String url = "http://localhost:" + port + "/api/v1/posts";
@@ -58,6 +59,7 @@ public class PostsApiControllerTest {
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(title);
         assertThat(all.get(0).getContent()).isEqualTo(content);
+        assertThat(all.get(0).getAuthor()).isEqualTo(author);
 
     }
 
