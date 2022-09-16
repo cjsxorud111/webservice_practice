@@ -39,19 +39,30 @@ public class PostsApiControllerTest {
     @Test
     public void Posts_등록된다() throws Exception {
         //given
-        String title = "title";
-        String content = "content";
-        String author = "author";
+        String title = "title1";
+        String content = "content1";
+        String author = "author1";
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
                 .title(title)
                 .content(content)
                 .author(author)
                 .build();
 
+        String title2 = "title2";
+        String content2 = "content2";
+        String author2 = "author2";
+        PostsSaveRequestDto requestDto2 = PostsSaveRequestDto.builder()
+                .title(title2)
+                .content(content2)
+                .author(author2)
+                .build();
+
+
         String url = "http://localhost:" + port + "/api/v1/posts";
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
+        restTemplate.postForEntity(url, requestDto2, Long.class);
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -59,7 +70,7 @@ public class PostsApiControllerTest {
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(title);
         assertThat(all.get(0).getContent()).isEqualTo(content);
-        assertThat(all.get(0).getAuthor()).isEqualTo(author);
+        assertThat(all.get(1).getAuthor()).isEqualTo(author2);
 
     }
 
