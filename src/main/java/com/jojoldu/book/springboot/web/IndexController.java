@@ -27,6 +27,17 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/myweb")
+    public String myweb(Model model, @LoginUser SessionUser user) {
+
+        model.addAttribute("posts", postsService.findAllDesc());
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "myweb";
+    }
+
     @GetMapping("/posts/save")
     public String postsSave() {
         return "posts-save";
