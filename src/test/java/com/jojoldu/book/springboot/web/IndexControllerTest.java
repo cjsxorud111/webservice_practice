@@ -41,8 +41,6 @@ public class IndexControllerTest {
                 .build();
     }
 
-
-
     @Test
     public void 메인페이지_로딩() {
         //when
