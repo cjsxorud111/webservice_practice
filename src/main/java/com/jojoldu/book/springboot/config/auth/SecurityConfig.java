@@ -20,14 +20,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/", "/css/**", "/images/**",
-                        "/js/**","/h2-console/**").permitAll()
+                        "/js/**","/h2-console/**", "/hanip", "/information", "/program", "/reservation", "/qna").permitAll()
                 .antMatchers("/api/v1/**").hasRole(Role.USER.name())
+                .antMatchers("/hanip-manager", "program-save", "/api/v1/**").hasRole(Role.MANAGER.name())
                 .anyRequest().authenticated()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/hanip")
                 .and()
                 .oauth2Login()
+                .defaultSuccessUrl("/hanip")
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
     }
