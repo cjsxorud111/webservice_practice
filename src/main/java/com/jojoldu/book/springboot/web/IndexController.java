@@ -3,6 +3,7 @@ package com.jojoldu.book.springboot.web;
 import com.jojoldu.book.springboot.config.auth.LoginUser;
 import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
 import com.jojoldu.book.springboot.service.posts.PostsService;
+import com.jojoldu.book.springboot.service.program.ProgramService;
 import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class IndexController {
 
     private final PostsService postsService;
+    private final ProgramService programService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
@@ -27,20 +29,76 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/myweb")
-    public String myweb(Model model, @LoginUser SessionUser user) {
+    @GetMapping("/hanip")
+    public String hanip(Model model, @LoginUser SessionUser user) {
 
         model.addAttribute("posts", postsService.findAllDesc());
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
 
-        return "myweb";
+        return "hanip";
+    }
+
+    @GetMapping("/information")
+    public String information(Model model, @LoginUser SessionUser user) {
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "information";
+    }
+
+    @GetMapping("/program")
+    public String program(Model model, @LoginUser SessionUser user) {
+
+        model.addAttribute("program", programService.findAllDesc());
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "program";
+    }
+
+    @GetMapping("/reservation")
+    public String reservation(Model model, @LoginUser SessionUser user) {
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "reservation";
+    }
+
+    @GetMapping("/qna")
+    public String qna(Model model, @LoginUser SessionUser user) {
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "qna";
+    }
+
+    @GetMapping("/hanip-manager")
+    public String hanipManager(Model model, @LoginUser SessionUser user) {
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "hanip-manager";
     }
 
     @GetMapping("/posts/save")
     public String postsSave() {
         return "posts-save";
+    }
+
+    @GetMapping("/program/save")
+    public String programSave() {
+        return "program-save";
     }
 
     @GetMapping("/posts/update/{id}")
