@@ -1,7 +1,6 @@
 {{>layout/header}}
     <br>
     <h1><a href="/hanip">&nbsp;&nbsp;&nbsp;&nbsp;한입</a></h1>
-
     <br>
     <div class="col-md-12">
         <!-- 로그인 기능 영역 -->
@@ -13,12 +12,15 @@
                 <a href="/logout" class="btn btn-info active" role="button">Logout</a>
                 {{/userName}}
                 {{^userName}}
+                    <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+                    <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+                {{/userName}}
+                {{^userName}}
                     <a href="/login" class="btn btn-success active" role="button">Login</a>
                 {{/userName}}
 
             </div>
         </div>
-        <span><a href="/hanip-manager">관리자페이지</a></span>
     </div>
     <br>
 
@@ -38,9 +40,5 @@
         </table>
     </div>
     <br>
-    <div>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <img src="https://i1.daumcdn.net/thumb/R600x0/?fname=https://blog.kakaocdn.net/dn/bZWlr2/btqRrQfrz56/35k9J7UlFKInoICc9yrnx1/img.jpg" alt="">
-    </div>
 
 {{>layout/footer}}

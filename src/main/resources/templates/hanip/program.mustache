@@ -1,7 +1,6 @@
 {{>layout/header}}
     <br>
     <h1><a href="/hanip">&nbsp;&nbsp;&nbsp;&nbsp;한입</a></h1>
-
     <br>
     <div class="col-md-12">
         <!-- 로그인 기능 영역 -->
@@ -10,7 +9,7 @@
 
                 {{#userName}}
                     Logged in as: <span id="user">{{userName}}</span>
-                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+                    <a href="/logout" class="btn btn-info active" role="button">Logout</a>
                 {{/userName}}
                 {{^userName}}
                     <a href="/login" class="btn btn-success active" role="button">Login</a>
@@ -18,7 +17,6 @@
 
             </div>
         </div>
-        <span><a href="/hanip-manager">관리자페이지</a></span>
     </div>
     <br>
 
@@ -37,10 +35,31 @@
 
         </table>
     </div>
-    <br>
-    <div>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <img src="https://i1.daumcdn.net/thumb/R600x0/?fname=https://blog.kakaocdn.net/dn/bZWlr2/btqRrQfrz56/35k9J7UlFKInoICc9yrnx1/img.jpg" alt="">
-    </div>
+    <br>&nbsp;
+    <div>&nbsp;&nbsp;&nbsp;프로그램목록</div>
+    <br><br>
+    <div class="col-md-12">
 
+        <!--목록 출력 영영 -->
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
+            <tr>
+                <th>프로그램번호</th>
+                <th>프로그램제목</th>
+                <th>프로그램작성자</th>
+                <th>최종수정일</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            {{#program}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td><a href="/program/detail/{{id}}">{{title}}</a></td>
+                    <td>{{author}}</td>
+                    <td>{{modifiedDate}}</td>
+                </tr>
+            {{/program}}
+            </tbody>
+        </table>
+    </div>
 {{>layout/footer}}
