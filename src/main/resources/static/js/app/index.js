@@ -4,6 +4,9 @@ var main = {
         $('#btn-save').on('click', function () {
             _this.save();
         })
+        $('#btn-program-save').on('click', function () {
+            _this.program_save();
+        })
         $('#btn-update').on('click',function () {
             _this.update();
         })
@@ -25,8 +28,28 @@ var main = {
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function () {
-            alert('글이등록되었습니다.');
-            window.location.href = '/';
+            alert('프로그램이등록되었습니다.');
+            window.location.href = '/program/save';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    program_save : function () {
+        var data = {
+            title: $('#title').val(),
+            author: $('#author').val(),
+            content: $('#content').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/program',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('프로그램이등록되었습니다.');
+            window.location.href = '/program/save';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
