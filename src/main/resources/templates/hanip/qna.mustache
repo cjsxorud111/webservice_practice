@@ -1,6 +1,7 @@
 {{>layout/header}}
-
-    <h1>myweb</h1>
+    <br>
+<h1><a href="/hanip">&nbsp;&nbsp;&nbsp;&nbsp;한입</a></h1>
+    <br>
     <div class="col-md-12">
         <!-- 로그인 기능 영역 -->
         <div class="row">
@@ -19,29 +20,22 @@
             </div>
         </div>
     </div>
+    <br>
     <div class="col-md-12">
 
-        <!--목록 출력 영영 -->
+        <!--배너 -->
         <table class="table table-horizontal table-bordered">
             <thead class="thead-strong">
-                <tr>
-                    <th>게시글번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>최종수정일</th>
-                </tr>
+            <tr>
+                <th><a href="/information">한입소개</a></th>
+                <th><a href="/program">프로그램</a></th>
+                <th><a href="/reservation">예약,신청</a></th>
+                <th><a href="/qna">문의</a></th>
+            </tr>
             </thead>
-            <tbody id="tbody">
-            {{#posts}}
-                    <tr>
-                        <td>{{id}}</td>
-                        <td><a href="/posts/update/{{id}}">{{title}}</a></td>
-                        <td>{{author}}</td>
-                        <td>{{modifiedDate}}</td>
-                    </tr>
-            {{/posts}}
-            </tbody>
+
         </table>
     </div>
+    <br>
 
 {{>layout/footer}}
