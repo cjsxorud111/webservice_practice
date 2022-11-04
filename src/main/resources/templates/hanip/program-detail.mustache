@@ -1,0 +1,35 @@
+{{>layout/header}}
+
+<h1>프로그램상세</h1>
+
+<div class="col-md-12">
+    <div class="col-md-4">
+
+        <div class="form-group">
+            <label for="title">글번호</label>
+            <div>{{program.id}}</div>
+
+        </div>
+        <div class="form-group">
+            <label for="title">제목</label>
+            <div>{{program.title}}</div>
+        </div>
+        <div class="form-group">
+            <label for="title">작성자</label>
+            <div>{{program.author}}</div>
+        </div>
+        <div class="form-group">
+            <label for="content">내용</label>
+            <div>{{program.content}}</div>
+        </div>
+        {{#is-manager}}
+            <a href="/program/update/{{program.id}}" role="button" class="btn btn-secondary">
+                <button type="button" class="btn btn-primary" id="progam-btn-update-page">
+                수정하기
+                </button>
+            </a>
+        {{/is-manager}}
+    </div>
+</div>
+
+{{>layout/footer}}
