@@ -107,4 +107,22 @@ public class IndexController {
         model.addAttribute("post", dto);
         return "posts-update";
     }
+
+    @GetMapping("/program/detail/{id}")
+    public String programDetail(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+        ProgramResponseDto dto = programService.findById(id);
+        model.addAttribute("program", dto);
+        if (user.getRole() == Role.MANAGER) {
+            model.addAttribute("is-manager", true);
+        }
+
+        return "program-detail";
+    }
+
+    @GetMapping("/program/update/{id}")
+    public String programUpdate(@PathVariable Long id, Model model) {
+        ProgramResponseDto dto = programService.findById(id);
+        model.addAttribute("program", dto);
+        return "program-update";
+    }
 }
