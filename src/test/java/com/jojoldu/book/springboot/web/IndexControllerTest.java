@@ -50,13 +50,32 @@ public class IndexControllerTest {
         assertThat(body).contains("스프링부트로 시작하는 웹서비스");
     }
 
-    @WithMockUser(roles = "USER")
     @Test
-    public void myweb_로딩() throws Exception {
+    public void 한입메인페이지_로딩() throws Exception {
 
-        mvc.perform(get("/myweb").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/hanip").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("myweb")))
+                .andExpect(content().string(containsString("한입")))
+                .andDo(print());
+    }
+
+    @Test
+    public void 한입_프로그램페이지_로딩() throws Exception {
+
+        mvc.perform(get("/program").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("프로그램목록")))
+                .andDo(print());
+    }
+
+    //매니저롤로 실행되는지
+    @WithMockUser(roles = "MANAGER")
+    @Test
+    public void 관리자페이지_로딩() throws Exception {
+
+        mvc.perform(get("/hanip_manager").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("한입")))
                 .andDo(print());
     }
 }
