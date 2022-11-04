@@ -10,8 +10,14 @@ var main = {
         $('#btn-update').on('click',function () {
             _this.update();
         })
+        $('#btn-program-update').on('click',function () {
+            _this.program_update();
+        })
         $('#btn-delete').on('click',function () {
             _this.delete();
+        })
+        $('#btn-program-delete').on('click',function () {
+            _this.program_delete();
         })
     },
     save : function () {
@@ -75,6 +81,27 @@ var main = {
             alert(JSON.stringify(error))
         });
     },
+    program_update : function () {
+        var data = {
+            title: $('#title').val(),
+            content: $('#content').val()
+        };
+
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/program/' +id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('프로그램이 수정되었습니다.');
+            window.location.href = '/program';
+        }).fail(function (error) {
+            alert(JSON.stringify(error))
+        });
+    },
     delete : function () {
         var id = $('#id').val();
 
@@ -86,6 +113,21 @@ var main = {
         }).done(function () {
             alert('글이 삭제되었습니다.');
             window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    program_delete : function () {
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/program/' +id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function () {
+            alert('프로그램이 삭제되었습니다.');
+            window.location.href = '/program';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

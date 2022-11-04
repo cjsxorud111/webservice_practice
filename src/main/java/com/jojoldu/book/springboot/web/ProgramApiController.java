@@ -15,8 +15,7 @@ public class ProgramApiController {
 
     @PostMapping("/api/v1/program")
     public Long save(@RequestBody ProgramSaveRequestDto requestDto) {
-        Long a = programService.save(requestDto);
-        return a;
+        return programService.save(requestDto);
     }
 
     @PutMapping("/api/v1/program/{id}")
@@ -27,7 +26,6 @@ public class ProgramApiController {
     @GetMapping("/api/v1/program/{id}")
     public ProgramResponseDto findById (@PathVariable Long id) {
         return programService.findById(id);
-
     }
 
     @DeleteMapping("/api/v1/program/{id}")
