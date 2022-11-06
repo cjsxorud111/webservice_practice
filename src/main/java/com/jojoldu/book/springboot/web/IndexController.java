@@ -2,14 +2,24 @@ package com.jojoldu.book.springboot.web;
 
 import com.jojoldu.book.springboot.config.auth.LoginUser;
 import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
+import com.jojoldu.book.springboot.domain.program.Program;
+import com.jojoldu.book.springboot.domain.user.Role;
 import com.jojoldu.book.springboot.service.posts.PostsService;
 import com.jojoldu.book.springboot.service.program.ProgramService;
+import com.jojoldu.book.springboot.service.user.UserService;
+import com.jojoldu.book.springboot.web.dto.PageListResponseDto;
 import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
+import com.jojoldu.book.springboot.web.dto.ProgramResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.ArrayList;
 
 @RequiredArgsConstructor
 @Controller
@@ -17,7 +27,7 @@ public class IndexController {
 
     private final PostsService postsService;
     private final ProgramService programService;
-
+    private final UserService userService;
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
 
@@ -50,10 +60,25 @@ public class IndexController {
         return "information";
     }
 
-    @GetMapping("/program")
-    public String program(Model model, @LoginUser SessionUser user) {
+    @GetMapping("/program?page={pageNumber}")
+    public String program(Model model, @PathVariable int pageNumber, @LoginUser SessionUser user, @PageableDefault(size=10) Pageable pageable) {
 
-        model.addAttribute("program", programService.findAllDesc());
+        //model.addAttribute("program", programService.findAllDesc(pageable));
+
+        Page<Program> dtos = programService.findAllById(user.getId(), pageable, pageNumber);
+        ArrayList<PageListResponseDto> pageNumberList = new ArrayList<>();
+
+        for (int i = 0; i <= dtos.getTotalPages(); i++) {
+            PageListResponseDto p = new PageListResponseDto(i+1);
+            pageNumberList.add(p);
+        }
+        
+        model.addAttribute("program_page_number", pageNumberList);
+        int l = dtos.getTotalPages();
+        model.addAttribute("program", programService.findAllDesc(pageable));
+
+        //if (pageNumber)
+
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
