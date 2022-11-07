@@ -19,6 +19,32 @@ var main = {
         $('#btn-program-delete').on('click',function () {
             _this.program_delete();
         })
+        $('#click-btn').on('click' ,function() {
+            _this.reservation_save();
+            var date = $('#datePicker').val();
+            alert(date);
+        });
+    },
+    reservation_save : function () {
+        var data = {
+            programId: document.getElementById('programId').innerHTML,
+            date: $('#datePicker').val(),
+            phoneNumber: $('#phoneNumber').val(),
+            uniqueness: $('#uniqueness').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/reservation',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('예약이 등록되었습니다. 유선 혹은 문자로 관리자가 연락드릴 예정입니다.');
+            window.location.href = '/program';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     },
     save : function () {
         var data = {
