@@ -14,7 +14,8 @@ public class ProgramApiController {
     private final ProgramService programService;
 
     @PostMapping("/api/v1/program")
-    public Long save(@RequestBody ProgramSaveRequestDto requestDto) {
+    public Long save(@RequestBody ProgramSaveRequestDto requestDto, @LoginUser SessionUser user) {
+        requestDto.setAuthorId(user.getId());
         return programService.save(requestDto);
     }
 
