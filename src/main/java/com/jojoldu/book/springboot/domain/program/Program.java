@@ -23,11 +23,15 @@ public class Program extends BaseTimeEntity {
 
     private String author;
 
+    @Column(name = "author_id", nullable = false)
+    private Long authorId;
+
     @Builder
-    public Program(String title, String content, String author) { //생성자
+    public Program(String title, String content, String author, Long userId) { //생성자
         this.title = title;
         this.content = content;
         this.author = author;
+        this.authorId = userId;
     }
 
     public void update(String title, String content) {
