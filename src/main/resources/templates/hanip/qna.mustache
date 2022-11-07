@@ -6,21 +6,21 @@
         <!-- 로그인 기능 영역 -->
         <div class="row">
             <div class="col-md-6">
-                <a href="/posts/save" role="button" class="btn
-                   btn-primary">글 등록</a>
+
                 {{#userName}}
                     Logged in as: <span id="user">{{userName}}</span>
-                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+                    <a href="/logout" class="btn btn-info active" role="button">Logout</a>
                 {{/userName}}
                 {{^userName}}
-                    <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
-                    <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+                    <a href="/login" class="btn btn-success active" role="button">Login</a>
                 {{/userName}}
 
             </div>
         </div>
+        <span><a href="/hanip-manager">관리자페이지</a></span>
     </div>
     <br>
+
     <div class="col-md-12">
 
         <!--배너 -->
@@ -28,8 +28,8 @@
             <thead class="thead-strong">
             <tr>
                 <th><a href="/information">한입소개</a></th>
-                <th><a href="/program">프로그램</a></th>
-                <th><a href="/reservation">예약,신청</a></th>
+                <th><a href="/program?page=0">프로그램</a></th>
+                <!--<th><a href="/reservation">예약,신청</a></th>-->
                 <th><a href="/qna">문의</a></th>
             </tr>
             </thead>
