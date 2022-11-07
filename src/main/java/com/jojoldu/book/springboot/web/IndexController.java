@@ -86,9 +86,9 @@ public class IndexController {
         return "program";
     }
 
-    @GetMapping("/reservation")
-    public String reservation(Model model, @LoginUser SessionUser user) {
-
+    @GetMapping("/reservation/{programId}")
+    public String reservation(Model model, @PathVariable Long programId, @LoginUser SessionUser user) {
+        model.addAttribute("programId", programId);
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
@@ -137,8 +137,11 @@ public class IndexController {
     public String programDetail(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         ProgramResponseDto dto = programService.findById(id);
         model.addAttribute("program", dto);
-        if (user.getRole() == Role.MANAGER) {
-            model.addAttribute("is-manager", true);
+
+        if (user != null) {
+            if (user.getRole() == Role.MANAGER) {
+                model.addAttribute("is-manager", true);
+            }
         }
 
         return "program-detail";
