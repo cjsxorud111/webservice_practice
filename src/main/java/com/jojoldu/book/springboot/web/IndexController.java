@@ -6,7 +6,6 @@ import com.jojoldu.book.springboot.domain.program.Program;
 import com.jojoldu.book.springboot.domain.user.Role;
 import com.jojoldu.book.springboot.service.posts.PostsService;
 import com.jojoldu.book.springboot.service.program.ProgramService;
-import com.jojoldu.book.springboot.service.user.UserService;
 import com.jojoldu.book.springboot.web.dto.PageListResponseDto;
 import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
 import com.jojoldu.book.springboot.web.dto.ProgramListResponseDto;
@@ -29,7 +28,6 @@ public class IndexController {
 
     private final PostsService postsService;
     private final ProgramService programService;
-    private final UserService userService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
