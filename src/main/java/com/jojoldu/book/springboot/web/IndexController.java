@@ -9,6 +9,7 @@ import com.jojoldu.book.springboot.service.program.ProgramService;
 import com.jojoldu.book.springboot.service.user.UserService;
 import com.jojoldu.book.springboot.web.dto.PageListResponseDto;
 import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
+import com.jojoldu.book.springboot.web.dto.ProgramListResponseDto;
 import com.jojoldu.book.springboot.web.dto.ProgramResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
@@ -28,6 +30,7 @@ public class IndexController {
     private final PostsService postsService;
     private final ProgramService programService;
     private final UserService userService;
+
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
 
@@ -60,24 +63,23 @@ public class IndexController {
         return "information";
     }
 
-    @GetMapping("/program?page={pageNumber}")
-    public String program(Model model, @PathVariable int pageNumber, @LoginUser SessionUser user, @PageableDefault(size=10) Pageable pageable) {
+    @GetMapping("/program")
+    public String program(Model model, @LoginUser SessionUser user, @PageableDefault(size = 10) Pageable pageable) {
 
-        //model.addAttribute("program", programService.findAllDesc(pageable));
-
-        Page<Program> dtos = programService.findAllById(user.getId(), pageable, pageNumber);
         ArrayList<PageListResponseDto> pageNumberList = new ArrayList<>();
+        PageListResponseDto pageListResponseDto;
+        Page<Program> pagenatedProgramData = programService.findAllDesc(pageable);
 
-        for (int i = 0; i <= dtos.getTotalPages(); i++) {
-            PageListResponseDto p = new PageListResponseDto(i+1);
-            pageNumberList.add(p);
+        for (int i = 0; i < pagenatedProgramData.getTotalPages(); i++) {
+            pageListResponseDto = new PageListResponseDto(i);
+            pageNumberList.add(pageListResponseDto);
         }
-        
-        model.addAttribute("program_page_number", pageNumberList);
-        int l = dtos.getTotalPages();
-        model.addAttribute("program", programService.findAllDesc(pageable));
 
-        //if (pageNumber)
+        model.addAttribute("program_page_number", pageNumberList);
+
+        model.addAttribute("program", pagenatedProgramData.getContent().stream()
+                .map(ProgramListResponseDto::new)
+                .collect(Collectors.toList()));
 
         if (user != null) {
             model.addAttribute("userName", user.getName());

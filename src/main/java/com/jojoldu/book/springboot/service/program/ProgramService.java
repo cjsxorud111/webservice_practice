@@ -3,16 +3,14 @@ package com.jojoldu.book.springboot.service.program;
 
 import com.jojoldu.book.springboot.domain.program.Program;
 import com.jojoldu.book.springboot.domain.program.ProgramRepository;
-import com.jojoldu.book.springboot.web.dto.ProgramListResponseDto;
 import com.jojoldu.book.springboot.web.dto.ProgramResponseDto;
 import com.jojoldu.book.springboot.web.dto.ProgramSaveRequestDto;
 import com.jojoldu.book.springboot.web.dto.ProgramUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -43,11 +41,8 @@ public class ProgramService {
     }
 
     @Transactional(readOnly = true)
-    public List<ProgramListResponseDto> findAllDesc() {
-
-        return programRepository.findAllDesc().stream()
-                .map(ProgramListResponseDto::new)
-                .collect(Collectors.toList());
+    public Page<Program> findAllDesc(Pageable pageable) {
+        return programRepository.findAllDesc(pageable);
     }
 
     @Transactional
