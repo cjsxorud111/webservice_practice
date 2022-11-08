@@ -36,8 +36,8 @@ create table program
     primary key (id)
 );
 
-drop table reservation if exists;
-create table reservation
+drop table qna if exists;
+create table qna
 (
     id bigint not null auto_increment,
     created_date datetime,
@@ -48,15 +48,17 @@ create table reservation
     primary key (id)
 );
 
-drop table qna if exists;
-create table qna
+drop table apointment if exists;
+create table apointment
 (
     id bigint not null auto_increment,
     created_date datetime,
     modified_date datetime,
-    author varchar(255),
-    content clob not null,
-    title varchar(500) not null,
+    program_id bigint not null,
+    apointment_date date,
+    phone_number varchar(500),
+    uniqueness clob not null,
+    author_id bigint not null,
     primary key (id)
 );
 
