@@ -9,8 +9,12 @@
             <div class="col-md-6">
 
                 {{#userName}}
-                    Logged in as: <span id="user">{{userName}}</span>
-                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+                    Logged in as:
+                    <span id="user">
+                        {{userName}}
+                    </span>
+                    <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+                    <a href="/user/detail" class="btn btn-info active" role="button">예약, 문의내역 보기</a>
                 {{/userName}}
                 {{^userName}}
                     <a href="/login" class="btn btn-success active" role="button">Login</a>
@@ -29,8 +33,8 @@
             <thead class="thead-strong">
             <tr>
                 <th><a href="/information">한입소개</a></th>
-                <th><a href="/program">프로그램</a></th>
-                <th><a href="/reservation">예약,신청</a></th>
+                <th><a href="/program?page=0">프로그램</a></th>
+                <!--<th><a href="/reservation">예약,신청</a></th>-->
                 <th><a href="/qna">문의</a></th>
             </tr>
             </thead>
