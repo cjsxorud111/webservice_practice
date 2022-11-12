@@ -59,6 +59,8 @@ create table apointment
     phone_number varchar(500),
     uniqueness clob not null,
     author_id bigint not null,
-    primary key (id)
+    primary key (id),
+    FOREIGN KEY (program_id)
+    REFERENCES PROGRAM(ID)
 );
 
