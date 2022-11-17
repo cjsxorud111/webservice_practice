@@ -1,24 +1,5 @@
 {{>layout/header}}
-    <br>
-<h1><a href="/hanip">&nbsp;&nbsp;&nbsp;&nbsp;한입</a></h1>
-    <br>
-    <div class="col-md-12">
-        <!-- 로그인 기능 영역 -->
-        <div class="row">
-            <div class="col-md-6">
 
-                {{#userName}}
-                    Logged in as: <span id="user">{{userName}}</span>
-                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-                {{/userName}}
-                {{^userName}}
-                    <a href="/login" class="btn btn-success active" role="button">Login</a>
-                {{/userName}}
-
-            </div>
-        </div>
-    </div>
-    <br>
     <div class="col-md-12">
         <!-- 로그인 기능 영역 -->
         <div class="row">
@@ -43,7 +24,7 @@
         <!-- 로그인 기능 영역 -->
         <div class="row">
             <div class="col-md-6">
-                <a href="/posts/save" role="button" class="btn
+                <a href="/manager/reservation" role="button" class="btn
                            btn-primary">3. 예약,신청 관리</a>
             </div>
         </div>
