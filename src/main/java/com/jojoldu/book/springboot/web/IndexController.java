@@ -86,6 +86,34 @@ public class IndexController {
         return "program";
     }
 
+    @GetMapping("/manager/reservation")
+    public String managersReservation(Model model, @LoginUser SessionUser user, @PageableDefault(size = 10) Pageable pageable) {
+
+        ArrayList<PageListResponseDto> pageNumberList = new ArrayList<>();
+        PageListResponseDto pageListResponseDto;
+        Page<Reservation> pagenatedReservationData = reservationService.findAllDesc(pageable);
+
+        for (int i = 0; i < pagenatedReservationData.getTotalPages(); i++) {
+            pageListResponseDto = new PageListResponseDto(i);
+            pageNumberList.add(pageListResponseDto);
+        }
+
+        model.addAttribute("reservation_page_number", pageNumberList);
+
+        model.addAttribute("reservation", pagenatedReservationData.getContent().stream()
+                .map(ReservationResponseDto::new)
+                .collect(Collectors.toList()));
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            if (user.getRole() == Role.MANAGER) {
+                model.addAttribute("is-manager", true);
+            }
+        }
+
+        return "manager-reservation";
+    }
+
     @GetMapping("/reservation/{programId}")
     public String reservation(Model model, @PathVariable Long programId, @LoginUser SessionUser user) {
         model.addAttribute("programId", programId);
