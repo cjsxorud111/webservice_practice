@@ -1,0 +1,40 @@
+{{>layout/header}}
+{{>layout/banner}}
+    <div>&nbsp;&nbsp;&nbsp;예약목록</div>
+    <br><br>
+    <div class="col-md-12">
+
+        <!--예약 출력 영영 -->
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
+            <tr>
+                <th>예약번호</th>
+                <th>프로그램제목</th>
+                <th>예약자</th>
+                <th>연락받을전화번호</th>
+                <th>여행예정일</th>
+                <th>예약한날짜</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            {{#reservation}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td><a href="/program/detail/{{program.id}}">{{program.title}}</a></td>
+                    <td>{{author.name}}</td>
+                    <td>{{phoneNumber}}</td>
+                    <td>{{date}}</td>
+                    <td>{{reservationCreateDate}}</td>
+                </tr>
+            {{/reservation}}
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        {{#program_page_number}}
+            <li class="page-item"><a class="page-link" href="/program?page={{pageNumber}}">{{pageNumber}}</a></li>
+        {{/program_page_number}}
+        </ul>
+    </nav>
+{{>layout/footer}}
