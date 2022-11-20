@@ -3,13 +3,12 @@ package com.jojoldu.book.springboot.web;
 import com.jojoldu.book.springboot.config.auth.LoginUser;
 import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
 import com.jojoldu.book.springboot.domain.program.Program;
+import com.jojoldu.book.springboot.domain.reservation.Reservation;
 import com.jojoldu.book.springboot.domain.user.Role;
 import com.jojoldu.book.springboot.service.posts.PostsService;
 import com.jojoldu.book.springboot.service.program.ProgramService;
-import com.jojoldu.book.springboot.web.dto.PageListResponseDto;
-import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
-import com.jojoldu.book.springboot.web.dto.ProgramListResponseDto;
-import com.jojoldu.book.springboot.web.dto.ProgramResponseDto;
+import com.jojoldu.book.springboot.service.reservation.ReservationService;
+import com.jojoldu.book.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +28,8 @@ public class IndexController {
     private final PostsService postsService;
     private final ProgramService programService;
 
+    private final ReservationService reservationService;
+
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
 
@@ -46,6 +47,9 @@ public class IndexController {
         model.addAttribute("posts", postsService.findAllDesc());
         if (user != null) {
             model.addAttribute("userName", user.getName());
+            if (user.getRole() == Role.MANAGER) {
+                model.addAttribute("is-manager", true);
+            }
         }
 
         return "hanip";
@@ -150,7 +154,13 @@ public class IndexController {
     }
 
     @GetMapping("/program/save")
-    public String programSave() {
+    public String programSave(Model model, @LoginUser SessionUser user) {
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            if (user.getRole() == Role.MANAGER) {
+                model.addAttribute("is-manager", true);
+            }
+        }
         return "program-save";
     }
 
@@ -167,12 +177,27 @@ public class IndexController {
         model.addAttribute("program", dto);
 
         if (user != null) {
+            model.addAttribute("userName", user.getName());
             if (user.getRole() == Role.MANAGER) {
                 model.addAttribute("is-manager", true);
             }
         }
 
         return "program-detail";
+    }
+
+    @GetMapping("/user/detail")
+    public String userDetail(Model model, @LoginUser SessionUser user) {
+
+        model.addAttribute("reservation", reservationService.findAllByAuthorId(user.getId()));
+
+        if (user != null) {
+            if (user.getRole() == Role.MANAGER) {
+                model.addAttribute("userName",  user.getName());
+            }
+        }
+
+        return "user-detail";
     }
 
     @GetMapping("/program/update/{id}")
