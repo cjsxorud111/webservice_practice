@@ -19,6 +19,9 @@ var main = {
         $('#btn-program-delete').on('click',function () {
             _this.program_delete();
         })
+        /*$('#btn-reservation-delete').on('click',function (id) {
+            _this.reservation_delete(id);
+        })*/
         $('#click-btn').on('click' ,function() {
             _this.reservation_save();
             var date = $('#datePicker').val();
@@ -148,16 +151,33 @@ var main = {
 
         $.ajax({
             type: 'DELETE',
-            url: '/api/v1/program/' +id,
+            url: '/api/v1/program/' + id,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8'
+            contentType: 'application/json; charset=utf-8'
         }).done(function () {
             alert('프로그램이 삭제되었습니다.');
             window.location.href = '/program';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    }
+    },
+/*    reservation_delete : function (id) {
+
+        alert(id);
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/reservation/' + id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function () {
+            alert('예약내역이 삭제되었습니다.');
+            location.reload();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }*/
+
+
 };
 main.init();
 
