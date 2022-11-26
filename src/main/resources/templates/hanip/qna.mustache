@@ -1,4 +1,36 @@
 {{>layout/header}}
 {{>layout/banner}}
+<div>&nbsp;&nbsp;&nbsp;qna목록</div>
+<br><br>
+<div class="col-md-12">
 
+    <!--목록 출력 영영 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>질문번호</th>
+            <th>질문제목</th>
+            <th>질문작성자</th>
+            <th>최종수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#qna}}
+            <tr>
+                <td>{{id}}</td>
+                <td><a href="/program/detail/{{id}}">{{title}}</a></td>
+                <td>{{author}}</td>
+                <td>{{modifiedDate}}</td>
+            </tr>
+        {{/qna}}
+        </tbody>
+    </table>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        {{#qna_page_number}}
+            <li class="page-item"><a class="page-link" href="/qna?page={{pageNumber}}">{{pageNumber}}</a></li>
+        {{/qna_page_number}}
+    </ul>
+</nav>
 {{>layout/footer}}
