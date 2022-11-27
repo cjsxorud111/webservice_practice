@@ -50,5 +50,4 @@ public class ProgramRepositoryTest {
         assertThat(programs.getAuthor()).isEqualTo(author);
         assertThat(programs.getAuthorId()).isEqualTo(authorId);
     }
-
 }

@@ -3,10 +3,12 @@ package com.jojoldu.book.springboot.web;
 import com.jojoldu.book.springboot.config.auth.LoginUser;
 import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
 import com.jojoldu.book.springboot.domain.program.Program;
+import com.jojoldu.book.springboot.domain.qna.Qna;
 import com.jojoldu.book.springboot.domain.reservation.Reservation;
 import com.jojoldu.book.springboot.domain.user.Role;
 import com.jojoldu.book.springboot.service.posts.PostsService;
 import com.jojoldu.book.springboot.service.program.ProgramService;
+import com.jojoldu.book.springboot.service.qna.QnaService;
 import com.jojoldu.book.springboot.service.reservation.ReservationService;
 import com.jojoldu.book.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,7 @@ public class IndexController {
 
     private final PostsService postsService;
     private final ProgramService programService;
-
+    private final QnaService qnaService;
     private final ReservationService reservationService;
 
     @GetMapping("/")
@@ -90,6 +92,31 @@ public class IndexController {
         return "program";
     }
 
+    @GetMapping("/qna")
+    public String qna(Model model, @LoginUser SessionUser user, @PageableDefault(size = 10) Pageable pageable) {
+
+        ArrayList<PageListResponseDto> pageNumberList = new ArrayList<>();
+        PageListResponseDto pageListResponseDto;
+        Page<Qna> pagenatedQnaData = qnaService.findAllDesc(pageable);
+
+        for (int i = 0; i < pagenatedQnaData.getTotalPages(); i++) {
+            pageListResponseDto = new PageListResponseDto(i);
+            pageNumberList.add(pageListResponseDto);
+        }
+
+        model.addAttribute("qna_page_number", pageNumberList);
+
+        model.addAttribute("qna", pagenatedQnaData.getContent().stream()
+                .map(QnaListResponseDto::new)
+                .collect(Collectors.toList()));
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "qna";
+    }
+
     @GetMapping("/manager/reservation")
     public String managersReservation(Model model, @LoginUser SessionUser user, @PageableDefault(size = 10) Pageable pageable) {
 
@@ -126,16 +153,6 @@ public class IndexController {
         }
 
         return "reservation";
-    }
-
-    @GetMapping("/qna")
-    public String qna(Model model, @LoginUser SessionUser user) {
-
-        if (user != null) {
-            model.addAttribute("userName", user.getName());
-        }
-
-        return "qna";
     }
 
     @GetMapping("/hanip-manager")
