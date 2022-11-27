@@ -43,6 +43,7 @@ create table qna
     created_date datetime,
     modified_date datetime,
     author varchar(255),
+    author_id bigint not null,
     content clob not null,
     title varchar(500) not null,
     primary key (id)
