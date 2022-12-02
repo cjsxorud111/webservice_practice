@@ -2,6 +2,7 @@ package com.jojoldu.book.springboot.service.program;
 
 import com.jojoldu.book.springboot.domain.program.Program;
 import com.jojoldu.book.springboot.domain.program.ProgramRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -47,6 +48,19 @@ class ProgramServiceTest {
 
         //then
         assertThat(entity).isEqualTo(program);
+    }
+
+    @Test
+    void 일치하는ID프로그램이없을때() {
+        //given
+        Long id = 1L;
+        when(mockProgramRepository.findById(id)).thenReturn(Optional.ofNullable(null));
+
+        //when
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            mockProgramRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("해당사용자가없습니다 id=" + id));
+        });
     }
 
     @Test
