@@ -1,9 +1,7 @@
 package com.jojoldu.book.springboot.service.qna;
 
 import com.jojoldu.book.springboot.domain.qna.Qna;
-import com.jojoldu.book.springboot.domain.qna.QnaRepository;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -18,9 +16,6 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class QnaServiceTest {
-
-    @Mock
-    private QnaRepository qnaRepository;
 
     @Test
     public void save() {
