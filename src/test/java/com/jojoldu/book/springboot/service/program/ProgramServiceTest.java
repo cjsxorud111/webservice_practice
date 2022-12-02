@@ -28,7 +28,7 @@ class ProgramServiceTest {
     }
 
     @Test
-    void findById테스트() {
+    void ID로_프로그램조회_테스트() {
         //given
         Long id = 1L;
         Program program = Program.builder()
