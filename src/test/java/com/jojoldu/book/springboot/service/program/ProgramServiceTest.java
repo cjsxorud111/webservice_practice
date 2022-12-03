@@ -2,6 +2,7 @@ package com.jojoldu.book.springboot.service.program;
 
 import com.jojoldu.book.springboot.domain.program.Program;
 import com.jojoldu.book.springboot.domain.program.ProgramRepository;
+import com.jojoldu.book.springboot.web.dto.ProgramSaveRequestDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
@@ -22,10 +23,22 @@ class ProgramServiceTest {
 
     @Test
     void save() {
-    }
+        //given
+        Long id = 1L;
+        ProgramSaveRequestDto requestDto = new ProgramSaveRequestDto();
+        requestDto.setTitle("title");
+        requestDto.setContent("content");
+        requestDto.setAuthor("author");
+        requestDto.setAuthorId(1L);
+        Program program = new Program();
 
-    @Test
-    void update() {
+        when(mockProgramRepository.save(requestDto.toEntity()).getId()).thenReturn(id);
+
+        //when
+        Long testId = mockProgramRepository.save(requestDto.toEntity()).getId();
+
+        //then
+        assertThat(testId).isEqualTo(id);
     }
 
     @Test
