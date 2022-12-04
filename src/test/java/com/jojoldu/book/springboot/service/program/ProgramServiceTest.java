@@ -22,23 +22,24 @@ class ProgramServiceTest {
     private ProgramRepository mockProgramRepository = mock(ProgramRepository.class);
 
     @Test
-    void save() {
+    void 프로그램등록성공() {
         //given
-        Long id = 1L;
-        ProgramSaveRequestDto requestDto = new ProgramSaveRequestDto();
-        requestDto.setTitle("title");
-        requestDto.setContent("content");
-        requestDto.setAuthor("author");
-        requestDto.setAuthorId(1L);
-        Program program = new Program();
+        ProgramSaveRequestDto mockRequestDto = mock(ProgramSaveRequestDto.class);
+        Program mockProgram = mock(Program.class);
+        mockProgram.setId(1L);
 
-        when(mockProgramRepository.save(requestDto.toEntity()).getId()).thenReturn(id);
+        mockRequestDto.setTitle("title");
+        mockRequestDto.setContent("content");
+        mockRequestDto.setAuthor("author");
+        mockRequestDto.setAuthorId(2L);
+
+        when(mockProgramRepository.save(mockRequestDto.toEntity())).thenReturn(mockProgram);
 
         //when
-        Long testId = mockProgramRepository.save(requestDto.toEntity()).getId();
+        Program program = mockProgramRepository.save(mockRequestDto.toEntity());
 
         //then
-        assertThat(testId).isEqualTo(id);
+        assertThat(program).isEqualTo(mockProgram);
     }
 
     @Test
