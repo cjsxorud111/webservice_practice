@@ -40,4 +40,5 @@ public class Program extends BaseTimeEntity {
         this.title = title;
         this.content = content;
     }
+
 }

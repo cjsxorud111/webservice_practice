@@ -83,7 +83,13 @@ public class IndexController {
 
         model.addAttribute("program", pagenatedProgramData.getContent().stream()
                 .map(ProgramListResponseDto::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()));*/
+
+        PageProgramListResponseDto tpagenatedProgramData = programService.findPagenatedPrograms(pageable);
+
+        model.addAttribute("program_page_number", tpagenatedProgramData.getPageNumberList());
+
+        model.addAttribute("program", tpagenatedProgramData.getProgramListResponseDtoList());
 
         if (user != null) {
             model.addAttribute("userName", user.getName());

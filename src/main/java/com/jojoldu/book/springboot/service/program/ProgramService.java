@@ -2,7 +2,9 @@ package com.jojoldu.book.springboot.service.program;
 
 
 import com.jojoldu.book.springboot.domain.program.Program;
+import com.jojoldu.book.springboot.domain.program.ProgramPagenation;
 import com.jojoldu.book.springboot.domain.program.ProgramRepository;
+import com.jojoldu.book.springboot.web.dto.PageProgramListResponseDto;
 import com.jojoldu.book.springboot.web.dto.ProgramResponseDto;
 import com.jojoldu.book.springboot.web.dto.ProgramSaveRequestDto;
 import com.jojoldu.book.springboot.web.dto.ProgramUpdateRequestDto;
@@ -43,6 +45,17 @@ public class ProgramService {
     @Transactional(readOnly = true)
     public Page<Program> findAllDesc(Pageable pageable) {
         return programRepository.findAllDesc(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public PageProgramListResponseDto findPagenatedPrograms(Pageable pageable) {
+        Page<Program> pagePrograms = programRepository.findAllDesc(pageable);
+
+
+        ProgramPagenation programPagenation = new ProgramPagenation();
+        PageProgramListResponseDto programListResponseDto = programPagenation.pagenate(pagePrograms);
+
+        return programListResponseDto;
     }
 
     @Transactional
