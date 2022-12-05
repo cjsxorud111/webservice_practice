@@ -5,6 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class PageListResponseDto {
+public class PageNumber {
     private final int pageNumber;
 }

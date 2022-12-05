@@ -51,7 +51,6 @@ public class ProgramService {
     public PageProgramListResponseDto findPagenatedPrograms(Pageable pageable) {
         Page<Program> pagePrograms = programRepository.findAllDesc(pageable);
 
-
         ProgramPagenation programPagenation = new ProgramPagenation();
         PageProgramListResponseDto programListResponseDto = programPagenation.pagenate(pagePrograms);
 

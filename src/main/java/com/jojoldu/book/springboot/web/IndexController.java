@@ -2,7 +2,6 @@ package com.jojoldu.book.springboot.web;
 
 import com.jojoldu.book.springboot.config.auth.LoginUser;
 import com.jojoldu.book.springboot.config.auth.dto.SessionUser;
-import com.jojoldu.book.springboot.domain.program.Program;
 import com.jojoldu.book.springboot.domain.qna.Qna;
 import com.jojoldu.book.springboot.domain.reservation.Reservation;
 import com.jojoldu.book.springboot.domain.user.Role;
@@ -70,21 +69,6 @@ public class IndexController {
     @GetMapping("/program")
     public String program(Model model, @LoginUser SessionUser user, @PageableDefault(size = 10) Pageable pageable) {
 
-        ArrayList<PageListResponseDto> pageNumberList = new ArrayList<>();
-        PageListResponseDto pageListResponseDto;
-        Page<Program> pagenatedProgramData = programService.findAllDesc(pageable);
-
-        for (int i = 0; i < pagenatedProgramData.getTotalPages(); i++) {
-            pageListResponseDto = new PageListResponseDto(i);
-            pageNumberList.add(pageListResponseDto);
-        }
-
-        model.addAttribute("program_page_number", pageNumberList);
-
-        model.addAttribute("program", pagenatedProgramData.getContent().stream()
-                .map(ProgramListResponseDto::new)
-                .collect(Collectors.toList()));*/
-
         PageProgramListResponseDto tpagenatedProgramData = programService.findPagenatedPrograms(pageable);
 
         model.addAttribute("program_page_number", tpagenatedProgramData.getPageNumberList());
@@ -101,13 +85,13 @@ public class IndexController {
     @GetMapping("/qna")
     public String qna(Model model, @LoginUser SessionUser user, @PageableDefault(size = 10) Pageable pageable) {
 
-        ArrayList<PageListResponseDto> pageNumberList = new ArrayList<>();
-        PageListResponseDto pageListResponseDto;
+        ArrayList<PageNumber> pageNumberList = new ArrayList<>();
+        PageNumber PageNumber;
         Page<Qna> pagenatedQnaData = qnaService.findAllDesc(pageable);
 
         for (int i = 0; i < pagenatedQnaData.getTotalPages(); i++) {
-            pageListResponseDto = new PageListResponseDto(i);
-            pageNumberList.add(pageListResponseDto);
+            PageNumber = new PageNumber(i);
+            pageNumberList.add(PageNumber);
         }
 
         model.addAttribute("qna_page_number", pageNumberList);
@@ -126,13 +110,13 @@ public class IndexController {
     @GetMapping("/manager/reservation")
     public String managersReservation(Model model, @LoginUser SessionUser user, @PageableDefault(size = 10) Pageable pageable) {
 
-        ArrayList<PageListResponseDto> pageNumberList = new ArrayList<>();
-        PageListResponseDto pageListResponseDto;
+        ArrayList<PageNumber> pageNumberList = new ArrayList<>();
+        PageNumber PageNumber;
         Page<Reservation> pagenatedReservationData = reservationService.findAllDesc(pageable);
 
         for (int i = 0; i < pagenatedReservationData.getTotalPages(); i++) {
-            pageListResponseDto = new PageListResponseDto(i);
-            pageNumberList.add(pageListResponseDto);
+            PageNumber = new PageNumber(i);
+            pageNumberList.add(PageNumber);
         }
 
         model.addAttribute("reservation_page_number", pageNumberList);

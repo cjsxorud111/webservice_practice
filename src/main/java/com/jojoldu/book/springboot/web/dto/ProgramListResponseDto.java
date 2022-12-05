@@ -2,10 +2,12 @@ package com.jojoldu.book.springboot.web.dto;
 
 import com.jojoldu.book.springboot.domain.program.Program;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 public class ProgramListResponseDto {
     private Long id;
     private String title;

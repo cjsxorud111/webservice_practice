@@ -9,6 +9,6 @@ import java.util.List;
 @Getter
 @RequiredArgsConstructor
 public class PageProgramListResponseDto {
-    private final ArrayList<PageListResponseDto> pageNumberList;
+    private final ArrayList<PageNumber> pageNumberList;
     private final List<ProgramListResponseDto> programListResponseDtoList;
 }
