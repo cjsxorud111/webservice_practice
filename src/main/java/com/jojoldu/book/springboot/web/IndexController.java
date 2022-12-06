@@ -193,6 +193,21 @@ public class IndexController {
         return "program-detail";
     }
 
+    @GetMapping("/qna/detail/{id}")
+    public String qnaDetail(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+        QnaResponseDto dto = qnaService.findById(id);
+        model.addAttribute("qna", dto);
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            if (user.getRole() == Role.MANAGER) {
+                model.addAttribute("is-manager", true);
+            }
+        }
+
+        return "qna-detail";
+    }
+
     @GetMapping("/user/detail")
     public String userDetail(Model model, @LoginUser SessionUser user) {
 
@@ -212,5 +227,12 @@ public class IndexController {
         ProgramResponseDto dto = programService.findById(id);
         model.addAttribute("program", dto);
         return "program-update";
+    }
+
+    @GetMapping("/qna/update/{id}")
+    public String qnaUpdate(@PathVariable Long id, Model model) {
+        QnaResponseDto dto = qnaService.findById(id);
+        model.addAttribute("qna", dto);
+        return "qna-update";
     }
 }

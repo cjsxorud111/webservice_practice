@@ -25,5 +25,4 @@ public class ProgramPagenation {
                 .map(ProgramListResponseDto::new)
                 .collect(Collectors.toList()));
     }
-
 }

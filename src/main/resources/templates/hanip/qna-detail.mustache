@@ -1,0 +1,42 @@
+{{>layout/header}}
+{{>layout/banner}}
+<div class="col-md-12">
+    <div class="col-md-4">
+
+        <div class="form-group">
+            <label for="title">글번호</label>
+            <div>{{qna.id}}</div>
+
+        </div>
+        <div class="form-group">
+            <label for="title">제목</label>
+            <div>{{qna.title}}</div>
+        </div>
+        <div class="form-group">
+            <label for="title">작성자</label>
+            <div>{{qna.author}}</div>
+        </div>
+        <div class="form-group">
+            <label for="content">내용</label>
+            <div>{{qna.content}}</div>
+        </div>
+        <div class="form-group">
+            <label for="content">내용</label>
+            <div>{{qna.content}}</div>
+        </div>
+        {{#is-manager}}
+            <a href="/qna/update/{{qna.id}}" role="button" class="btn btn-secondary">
+                <button type="button" class="btn btn-primary" id="qna-btn-update-page">
+                수정하기
+                </button>
+            </a>
+        {{/is-manager}}
+        <a href="/qna-answer/{{qna.id}}" role="button" class="btn btn-secondary">
+            <button type="button" class="btn btn-primary" id="qna-answer-btn">
+                답변하기
+            </button>
+        </a>
+    </div>
+</div>
+
+{{>layout/footer}}

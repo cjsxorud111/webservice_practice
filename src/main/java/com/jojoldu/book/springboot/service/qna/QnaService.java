@@ -5,6 +5,7 @@ import com.jojoldu.book.springboot.domain.program.Program;
 import com.jojoldu.book.springboot.domain.program.ProgramRepository;
 import com.jojoldu.book.springboot.domain.qna.Qna;
 import com.jojoldu.book.springboot.domain.qna.QnaRepository;
+import com.jojoldu.book.springboot.web.dto.QnaResponseDto;
 import com.jojoldu.book.springboot.web.dto.QnaSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,6 +28,14 @@ public class QnaService {
     @Transactional(readOnly = true)
     public Page<Qna> findAllDesc(Pageable pageable) {
         return qnaRepository.findAllDesc(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public QnaResponseDto findById(Long id) {
+        Qna entity =  qnaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당사용자가없습니다 id=" + id));
+
+        return new QnaResponseDto(entity);
     }
 
     @Transactional
