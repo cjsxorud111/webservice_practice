@@ -180,6 +180,7 @@ public class IndexController {
 
     @GetMapping("/program/detail/{id}")
     public String programDetail(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+
         ProgramResponseDto dto = programService.findById(id);
         model.addAttribute("program", dto);
 
