@@ -8,8 +8,13 @@ import org.springframework.data.domain.Page;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * 프로그램 조회시 페이지리스트 분리를 위한 클래스
+ */
 public class ProgramPagenation {
-
+    /**
+     * 프로그램 리스트와 프로그램 페이지리스트를 리턴
+     */
     public PageProgramListResponseDto pagenate(Page<Program> pagePrograms) {
 
         ArrayList<PageNumber> pageNumberList = new ArrayList<>();
