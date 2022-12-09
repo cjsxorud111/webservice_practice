@@ -27,7 +27,7 @@ public class ProgramRepositoryTest {
     }
 
     @Test
-    public void 모든프로그램목록_불러오기() {
+    public void 모든프로그램목록_조회() {
         //given
         String title = "테스트 프로그램 제목";
         String content = "테스트 프로그램 컨텐츠 본문 제목";
@@ -53,7 +53,7 @@ public class ProgramRepositoryTest {
     }
 
     @Test
-    public void ID와일치하는프로그램_불러오기() {
+    public void ID와일치하는프로그램_조회() {
         //given
         String title = "테스트 프로그램 제목";
         String content = "테스트 프로그램 컨텐츠 본문 제목";
