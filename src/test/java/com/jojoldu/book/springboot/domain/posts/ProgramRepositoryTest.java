@@ -59,7 +59,7 @@ public class ProgramRepositoryTest {
         String content = "테스트 프로그램 컨텐츠 본문 제목";
         String author = "jojoldu@gmail.com";
         Long authorId = 2L;
-        Long id = 2L;
+        Long id = 1L;
 
         programRepository.save(Program.builder()
                 .title(title)
