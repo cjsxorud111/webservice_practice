@@ -7,13 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
@@ -39,15 +37,6 @@ public class IndexControllerTest {
                 .webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
-    }
-
-    @Test
-    public void 메인페이지_로딩() {
-        //when
-        String body = this.restTemplate.getForObject("/", String.class);
-
-        //then
-        assertThat(body).contains("스프링부트로 시작하는 웹서비스");
     }
 
     @Test
@@ -77,13 +66,12 @@ public class IndexControllerTest {
     }*/
 
     //매니저롤로 실행되는지
-    @WithMockUser(roles = "MANAGER")
+/*    @WithMockUser(roles = "USER")
     @Test
     public void 관리자페이지_로딩() throws Exception {
 
         mvc.perform(get("/hanip_manager").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("한입")))
                 .andDo(print());
-    }
+    }*/
 }
