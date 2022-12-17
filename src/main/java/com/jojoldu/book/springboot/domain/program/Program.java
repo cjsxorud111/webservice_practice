@@ -29,7 +29,7 @@ public class Program extends BaseTimeEntity {
     private Long authorId;
 
     @Builder
-    public Program(String title, String content, String author, Long userId) { //생성자
+    public Program(String title, String content, String author, Long userId) {
         this.title = title;
         this.content = content;
         this.author = author;
