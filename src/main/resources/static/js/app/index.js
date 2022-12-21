@@ -10,6 +10,9 @@ var main = {
         $('#btn-update').on('click',function () {
             _this.update();
         })
+        $('#btn-qna-update').on('click',function () {
+            _this.qna_update();
+        })
         $('#btn-program-update').on('click',function () {
             _this.program_update();
         })
@@ -127,6 +130,27 @@ var main = {
         }).done(function () {
             alert('프로그램이 수정되었습니다.');
             window.location.href = '/program';
+        }).fail(function (error) {
+            alert(JSON.stringify(error))
+        });
+    },
+    qna_update : function () {
+        var data = {
+            title: $('#title').val(),
+            content: $('#content').val()
+        };
+
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/qna/' +id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('qna가 수정되었습니다.');
+            window.location.href = '/qna';
         }).fail(function (error) {
             alert(JSON.stringify(error))
         });
