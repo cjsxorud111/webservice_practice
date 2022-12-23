@@ -22,6 +22,9 @@ var main = {
         $('#btn-program-delete').on('click',function () {
             _this.program_delete();
         })
+        $('#btn-qna-delete').on('click',function () {
+            _this.qna_delete();
+        })
         /*$('#btn-reservation-delete').on('click',function (id) {
             _this.reservation_delete(id);
         })*/
@@ -181,6 +184,21 @@ var main = {
         }).done(function () {
             alert('프로그램이 삭제되었습니다.');
             window.location.href = '/program';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    qna_delete : function () {
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/qna/' + id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function () {
+            alert('프로그램이 삭제되었습니다.');
+            window.location.href = '/qna';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
