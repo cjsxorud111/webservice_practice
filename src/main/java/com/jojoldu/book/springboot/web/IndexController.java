@@ -251,4 +251,18 @@ public class IndexController {
         }
         return "qna-update";
     }
+
+    @GetMapping("/qna/answer/{id}")
+    public String qnaAnswer(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+        QnaResponseDto dto = qnaService.findById(id);
+        model.addAttribute("qna", dto);
+
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            if (user.getRole() == Role.MANAGER) {
+                model.addAttribute("is-manager", true);
+            }
+        }
+        return "qna-answer";
+    }
 }
