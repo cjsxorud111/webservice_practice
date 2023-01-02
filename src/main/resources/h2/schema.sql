@@ -49,6 +49,8 @@ create table qna
     primary key (id)
 );
 
+CREATE INDEX title ON qna(title);
+
 drop table apointment if exists;
 create table apointment
 (
