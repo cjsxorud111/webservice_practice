@@ -36,6 +36,8 @@ create table program
     primary key (id)
 );
 
+CREATE INDEX author_id ON program(author_id);
+
 drop table qna if exists;
 create table qna
 (
