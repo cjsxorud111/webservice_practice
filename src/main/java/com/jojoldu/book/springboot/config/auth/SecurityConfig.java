@@ -18,19 +18,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
-                .authorizeRequests()
-                .antMatchers("login","/", "/css/**", "/images/**",
-                        "/js/**","/h2-console/**", "/hanip", "/information", "/program", "/program/detail/**", "/reservation", "/qna").permitAll()
-                .antMatchers("/api/v1/**").hasRole(Role.USER.name())
-                .antMatchers("/hanip-manager", "program-save", "/api/v1/**").hasRole(Role.MANAGER.name())
-                .anyRequest().authenticated()
+                    .authorizeRequests()
+                    .antMatchers("login","/", "/css/**", "/images/**",
+                            "/js/**","/h2-console/**", "/hanip", "/information", "/program", "/program/detail/**", "/reservation", "/qna").permitAll()
+                    .antMatchers("/api/v1/**").hasRole(Role.USER.name())
+                    .antMatchers("/hanip-manager", "program-save", "/api/v1/**").hasRole(Role.MANAGER.name())
+                    .anyRequest().authenticated()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/hanip")
+                    .logout()
+                    .logoutSuccessUrl("/hanip")
                 .and()
-                .oauth2Login()
-                .defaultSuccessUrl("/hanip")
-                .userInfoEndpoint()
-                .userService(customOAuth2UserService);
+                    .oauth2Login()
+
+                        .defaultSuccessUrl("/hanip").loginPage("/login")
+                            .userInfoEndpoint()
+                                .userService(customOAuth2UserService);
     }
 }
