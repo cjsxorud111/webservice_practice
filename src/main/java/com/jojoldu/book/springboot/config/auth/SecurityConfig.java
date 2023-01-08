@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                     .authorizeRequests()
-                    .antMatchers("login","/", "/css/**", "/images/**",
+                    .antMatchers("/oauth_login","/", "/css/**", "/images/**",
                             "/js/**","/h2-console/**", "/hanip", "/information", "/program", "/program/detail/**", "/reservation", "/qna").permitAll()
                     .antMatchers("/api/v1/**").hasRole(Role.USER.name())
                     .antMatchers("/hanip-manager", "program-save", "/api/v1/**").hasRole(Role.MANAGER.name())
@@ -29,8 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/hanip")
                 .and()
                     .oauth2Login()
-
-                        .defaultSuccessUrl("/hanip").loginPage("/login")
+                        .defaultSuccessUrl("/hanip").loginPage("/oauth_login")
                             .userInfoEndpoint()
                                 .userService(customOAuth2UserService);
     }
