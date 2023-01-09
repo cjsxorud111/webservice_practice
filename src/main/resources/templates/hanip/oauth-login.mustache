@@ -1,15 +1,34 @@
-{{>layout/header}}
-{{>layout/banner}}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>스프링부트 웹서비스</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<br>
+<h1><a href="/hanip">&nbsp;&nbsp;&nbsp;&nbsp;한입</a></h1>
+
+<br>
 
     <div class="container">
-        <h2 class="form-signin-heading">로그인이 필요한 페이지입니다.</h2>
-        <p>(Login with OAuth 2.0)</p>
-        <p>외부 로그인 계정을 선택해주세요.</p>
-        <!--<table class="table table-striped" th:each="url : ${urls}">
-            <tr>
-                <td><a href="#" th:href="${url.value}" th:text="${url.key}">Naver</a></td>
-            </tr>
-        </table>-->
+        <h2 class="form-signin-heading">로그인 해주세요</h2>
+        <p>외부 로그인 계정을 선택해주세요</p>
+
+        <table class="table table-striped">
+            {{#urls}}
+                <tr>
+                    <td><a href="{{Google}}">Google</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{{Naver}}">Naver</a></td>
+                </tr>
+            {{/urls}}
+        </table>
+
     </div>
 
 {{>layout/footer}}
