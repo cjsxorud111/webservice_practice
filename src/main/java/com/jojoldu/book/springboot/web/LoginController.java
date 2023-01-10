@@ -18,8 +18,8 @@ public class LoginController {
     private final ClientRegistrationRepository clientRegistrationRepository;
 
     @SuppressWarnings("unchecked")
-    @GetMapping("/login")
-    public String getLoginPage(Model model) throws Exception {
+    @GetMapping("/oauth_login")
+    public String getLoginPage(Model model) {
         Iterable<ClientRegistration> clientRegistrations = null;
         ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository)
                 .as(Iterable.class);
